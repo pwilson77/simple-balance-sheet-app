@@ -1,0 +1,62 @@
+button.addbutton {
+	width: 35px;
+	height: 70px;
+	background:transparent;
+	border:transparent;
+	margin-left:70%;
+
+}
+
+.addbutton img {
+	width: inherit;
+}
+
+.cancel{
+	margin-left: 85%;
+    color: #272424;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.cancel:hover {
+	margin-left: 82%;
+    color: aquamarine;
+    background-color: white;
+    border-color: transparent;
+}
+
+.cancel2 {
+	margin-left: 85%;
+    color: #272424;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.cancel2:hover {
+	margin-left: 83%;
+    color: aquamarine;
+    background-color: #b7a3a3;
+    border-color: transparent;
+}
+
+button.addbutton2 {
+	width: 40px;
+    height: 70px;
+    background: transparent;
+    border: transparent;
+    margin-left: 75%;
+    margin-top: -41px;
+}
+
+.addbutton2 {
+		width: inherit;
+}
+
+.tdelete{
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.tdelete:hover {
+	background-color: crimson;
+}

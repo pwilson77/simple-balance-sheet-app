@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoamahProject</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amethysta">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel">
+    <link rel="stylesheet" href="assets/css/Popup-Element-Overlay.css">
+    <link rel="stylesheet" href="assets/css/Popup-Element-Overlay1.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body style="background-color:#252831;">
+    <form id="offerinfo">
+        <div class="modal fade" role="dialog" tabindex="-1" id="modal1">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">Enter Offertory Category </h4><button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+
+                    <div class="modal-body d-flex flex-column">
+
+                        <input type="text" placeholder="Enter Name" name="o_name" id="oname">
+                        <input type="text" placeholder="Enter the current amount" style="width:inherit;margin-top:10px;"
+                            name="o_amount" id="oamount">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="modal fade" role="dialog" tabindex="-1" id="modal2">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Enter new transaction</h4><button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+
+                <div class="modal-body d-flex flex-column">
+
+                    <input type="text" placeholder="Enter Amount Please remember the convention" id="tamount">
+                    <input type="text" placeholder="Enter Info about the transaction" style="width:inherit;margin-top:10px;"
+                        id="ocomment">
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary obutton" type="submit" data-dismiss="modal">Save</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row" style="margin-top:40px;">
+                <div class="col-md-4 col-lg-4 col-xl-3 d-flex justify-content-start"><i class="fa fa-leaf align-items-start"
+                        style="color:rgb(154,162,170);font-size:50px;"></i>
+                    <h1 style="color:rgb(154,162,170);">&nbsp;CAS</h1>
+                </div>
+                <div class="col-md-8 col-lg-8 col-xl-9">
+                    <p class="pass" new="<?= $_COOKIE[" password"] ?>" style="color:rgb(89,94,96);">DASHBOARD</p>
+                    <h2 style="color:rgb(238,240,241);font-family:Amethysta, serif;font-size:27px;">Offertory &amp;
+                        Others</h2>
+                    <hr style="color:rgb(227,229,231);background-color:rgb(227,229,231);margin-top:20px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="app">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-xl-3 d-flex flex-column justify-content-center align-self-start">
+                    <p class="align-self-start" style="color:rgb(89,94,96);"><br>DASHBOARD</p>
+                    <div><a class="align-self-start" href="main.html" style="color:rgb(154,162,170);">Overview</a></div>
+                    <div><a class="align-self-start" href="bank.html" style="color:rgb(154,162,170);">Bank Accounts</a>
+                        <div><a class="align-self-start" href="#" style="color:rgb(154,162,170);">Offertory &amp;
+                                Others</a></div>
+                    </div>
+
+                    <div><a class="align-self-start" href="transaction.html" style="color:rgb(154,162,170);">Transactions</a></div>
+                </div>
+                <div class="col-md-8 col-lg-8 col-xl-9 d-flex flex-row flex-wrap o_col" style="margin-top:10px;">
+
+                    <div v-for="(collection,index) in collections" class="align-self-start o_row" style="width:20%;height:auto;background-color:#fbf8f8;margin-top:10px;margin-left:4%; box-shadow: 0px 0px 5px 0px white;">
+                        <button class="cancel2" :oid="collection.id" :oname="collection.name"> <i class="fa fa-close"></i></button>
+                        <h5 class="text-center">&nbsp; {{collection.name}}   </h5>
+                        <p class="text-center">Total : &#8373{{collectionsAmount[index].total}} </p>
+                        <button class="addbutton2" :oid="collection.id" :oname="collection.name"><img src="plus.svg" alt="add new transaction"></button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 col-lg-1 col-xl-1 offset-md-4 offset-lg-5 offset-xl-4 align-self-end" style="margin-top:20px;"><button
+            class="btn btn-primary modal1" type="button" data-toggle="modal" data-target="#modal1" data-style="width:inherit;background-color:rgb(35,133,45);"><i
+                class="icon ion-ios-plus-empty" style="font-size:39px;"></i></button></div>
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/offertory.js"></script>
+    <script src="assets/js/Popup-Element-Overlay.js"></script>
+</body>
+
+</html>

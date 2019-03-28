@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoamahProject</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amethysta">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cinzel">
+    <link rel="stylesheet" href="assets/css/Popup-Element-Overlay.css">
+    <link rel="stylesheet" href="assets/css/Popup-Element-Overlay1.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/datatables.css">
+</head>
+
+<body style="background-color:#252831;">
+   
+    <div>
+        <div class="container">
+            <div class="row" style="margin-top:40px;">
+                <div class="col-md-4 col-lg-4 col-xl-2 d-flex justify-content-start"><i class="fa fa-leaf align-items-start" style="color:rgb(154,162,170);font-size:50px;"></i>
+                    <h1 style="color:rgb(154,162,170);">&nbsp;CAS</h1>
+                </div>
+                <div class="col-md-8 col-lg-8 col-xl-10">
+                    <p style="color:rgb(89,94,96);">DASHBOARD</p>
+                    <h2 style="color:rgb(238,240,241);font-family:Amethysta, serif;font-size:27px;">Transactions</h2>
+                    <hr style="color:rgb(227,229,231);background-color:rgb(227,229,231);margin-top:20px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-xl-2 d-flex flex-column justify-content-center align-self-start">
+                    <p class="align-self-start" style="color:rgb(89,94,96);"><br>DASHBOARD</p>
+                    <div><a class="align-self-start" href="index.html" style="color:rgb(154,162,170);">Overview</a></div>
+                    <div><a class="align-self-start" href="bank.html" style="color:rgb(154,162,170);">Bank Accounts</a></div>
+                    <div><a class="align-self-start" href="collection.html" style="color:rgb(154,162,170);">Offertory &amp; Others</a></div>
+                    <div><a class="align-self-start" href="transaction.html" style="color:rgb(154,162,170);">Transactions</a></div>
+                </div>
+                <div class="col-md-8 col-lg-9 col-xl-10 d-flex flex-row flex-wrap my-auto t_col" style="margin-top:10px; background-color: white; padding-top: 10px;  padding-bottom: 10px; ">
+                
+                        <table id="trans" class="mdl-data-table" width="117%">
+                            <thead>
+                                <tr>
+                                    <th>Bank </th>
+                                    <th>Amount</th>
+                                    <th>Comment</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
+                                    <th>Delete</th>
+                                
+                                </tr>
+                            </thead>
+                            
+                        </table>
+                   
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>window.$ = window.jQuery = require('jquery');</script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/transaction.js"></script>
+    <script src="assets/js/Popup-Element-Overlay.js"></script>
+    <script src="assets/datatables.js"></script>
+</body>
+ 
+</html>

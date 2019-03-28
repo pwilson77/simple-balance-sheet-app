@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoamahProject</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+
+<body>
+    <div id="app">
+        <v-app id="inspire">
+            <v-navigation-drawer clipped v-model="drawer" app>
+                <v-list dense>
+                    <template v-for="menu in menus">
+                        <v-list-tile :key="menu.text" @click="">
+                            <v-list-tile-action>
+                                <v-icon>{{ menu.icon }}</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title>
+                                    {{ menu.text }}
+                                </v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                    </template>
+                </v-list>
+            </v-navigation-drawer>
+            <v-toolbar clipped-left color="blue darken-3" dark app fixed>
+                <v-toolbar-title class="ml-0 pl-3">
+                    <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+                    <span class="hidden-sm-and-down">Asore Church Manangement</span>
+                </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn icon>
+                    <v-icon>apps</v-icon>
+                </v-btn>
+                <v-btn icon>
+                    <v-icon>notifications</v-icon>
+                </v-btn>
+            </v-toolbar>
+            <v-content>
+                <v-container fluid fill-height grid-list-md>
+                    <v-layout row wrap>
+                        <v-flex sm4 md4 v-for="(bank, index) in banks" :key="index">
+                            <v-card>
+                                <v-card-title primary-title>
+                                    <div>
+                                        <h3 class="headline mb-0">{{bank.name}}</h3>
+                                        <div>Amount : GHc {{bankamount[index].total}}</div>
+                                    </div>
+                                </v-card-title>
+
+                                <v-card-actions>
+                                    <v-btn flat color="orange" @click="showTransactionModal(index)">Add</v-btn>
+                                    <v-btn flat color="orange" @click="deleteBank(bank.id)">Delete</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                            <v-card color="blue-grey darken-2" class="white--text">
+                                <v-card-title primary-title>
+                                    <div class="headline">Unlimited music now</div>
+                                    <div>Listen to your favorite artists and albums whenever and wherever, online and
+                                        offline.</div>
+                                </v-card-title>
+                                <v-card-actions>
+                                    <v-btn flat dark>Listen now</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                    <v-fab-transition>
+                        <v-btn color="primary" @click="add_bank_modal = true" dark fab fixed bottom right>
+                            <v-icon>share</v-icon>
+                        </v-btn>
+                    </v-fab-transition>
+                </v-container>
+            </v-content>
+        </v-app>
+        <v-dialog v-model="add_transaction_modal" persistent max-width="500px">
+            <v-card>
+                <v-card-title>
+                    <span class="headline">Add Bank Transaction</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container grid-list-md>
+                        <v-layout wrap>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field type="number" label="Amount" required v-model="transaction.amount"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md12>
+                                <v-text-field label="Comment" v-model="transaction.comment"></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                    <small>*indicates required field</small>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" flat @click.native="add_transaction_modal = false">Close</v-btn>
+                    <v-btn color="blue darken-1" flat @click.native="addBankTransaction">Save</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <v-dialog v-model="add_bank_modal" persistent max-width="500px">
+            <v-card>
+                <v-card-title>
+                    <span class="headline">Add Bank</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container grid-list-md>
+                        <v-layout wrap>
+                            <v-flex xs12 sm6 md12>
+                                <v-text-field label="Bank Name" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field label="Initial Amount" type="number"></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                    <small>*indicates required field</small>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" flat @click.native="add_bank_modal = false">Close</v-btn>
+                    <v-btn color="blue darken-1" flat @click.native="add_bank_modal = false">Save</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+<script>
+    const { ipcRenderer } = require('electron')
+
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+            dialog: false,
+            drawer: null,
+            add_bank_modal: null,
+            add_transaction_modal: null,
+            menus: [
+                { icon: 'contacts', text: 'Overview' },
+                { icon: 'history', text: 'Bank Accounts' },
+                { icon: 'content_copy', text: 'Offertory & Others' },
+                { icon: 'settings', text: 'Transactions' }
+            ],
+            bank: {
+                name: null,
+                amount: null
+            },
+            transaction: {
+                comment: null,
+                bank_id: null,
+                amount: null,
+                bank_name: null
+            },
+            banks: [],
+            bankamount: []
+        },
+
+        methods: {
+
+            showTransactionModal: function (id) {
+                var bank = this.banks[id];
+                this.transaction.bank_id = bank.id;
+                this.transaction.bank_name = bank.name;
+                this.add_transaction_modal = true;
+            },
+
+            addNewBank: function () {
+                ipcRenderer.send("create-bank-info",
+                    { b_name: bank.name, b_amount: bank.amount }
+                )
+            },
+            addBankTransaction: function () {
+                ipcRenderer.send("update-bank-transaction",
+                    { t_bid: transaction.bank_id, t_amount: transaction.amount, t_comment: transaction.comment, b_name: transaction.bank_name }
+                )
+                this.add_transaction_modal = false;
+            },
+            deleteBank: function (id) {
+                ipcRenderer.send("delete-bank-info", id)
+            }
+        },
+
+        mounted: function () {
+            ipcRenderer.send("bankWindowLoaded")
+            ipcRenderer.on("bankNameSent", function (evt, bankrows) {
+                app.banks = bankrows;
+                console.log(bankrows);
+            });
+            ipcRenderer.on("bankAmountSent", function (evt, amountrow) {
+                app.bankamount = amountrow;
+                console.log(amountrow)
+            })
+        }
+    });
+
+</script>
+
+</html>
